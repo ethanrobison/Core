@@ -14,6 +14,12 @@ namespace Code.Utils
 #endif
         }
 
+        public static void Assert (bool condition) {
+#if UNITY_EDITOR
+            UnityEngine.Debug.Assert(condition);
+#endif
+        }
+
         public static void Assert (bool condition, string message) {
 #if UNITY_EDITOR
             UnityEngine.Debug.Assert(condition, message);

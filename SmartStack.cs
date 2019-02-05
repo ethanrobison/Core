@@ -49,9 +49,9 @@ namespace Code.Utils
 
     public interface ISmartStackElement
     {
-        void Activate ();
         void OnPushed ();
-        void OnPopped ();
+        void Activate ();
         void Deactivate ();
+        void OnPopped ();
     }
 }
