@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Utils
+namespace Utils
 {
     /// <summary>
     /// Extension methods for GameObjects. Lets you call GetComponent with null checking.

@@ -1,4 +1,4 @@
-namespace Code.Utils
+namespace Utils
 {
     public static class Logging
     {

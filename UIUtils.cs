@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Code.Utils
+namespace Utils
 {
     public static class UIUtils
     {
