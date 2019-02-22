@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Utils
 {
@@ -8,11 +12,14 @@ namespace Utils
             return GameObject.Find("Canvas").transform; // hope there's only ever one canvas
         }
 
+        public static TextMeshProUGUI GetTextMesh (GameObject go, string name) {
+            return FindUICompOfType<TextMeshProUGUI>(go, name);
+        }
 
-        /// <summary>
-        /// Given a transform and the name of a child, get its component of type T.
-        /// Complains if child/component nonexistent.
-        /// </summary>
+        public static Button GetButton (GameObject go, string name) {
+            return FindUICompOfType<Button>(go, name);
+        }
+
         public static T FindUICompOfType<T> (Transform parent, string name) where T : MonoBehaviour {
             var child = parent.Find(name);
             if (child == null) {
@@ -25,11 +32,16 @@ namespace Utils
             return comp;
         }
 
-        /// <summary>
-        /// Given a gameobject and the name of a child, get its component of type T.
-        /// </summary>
         public static T FindUICompOfType<T> (GameObject go, string name) where T : MonoBehaviour {
             return FindUICompOfType<T>(go.transform, name);
+        }
+    }
+
+    public static class ButtonExtensions
+    {
+        public static void SetListener (this Button btn, UnityAction onclick) {
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(onclick);
         }
     }
 }
