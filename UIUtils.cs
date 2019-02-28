@@ -12,8 +12,12 @@ namespace Utils
             return GameObject.Find("Canvas").transform; // hope there's only ever one canvas
         }
 
+        public static TextMeshProUGUI GetTextMesh (Transform tr, string name) {
+            return FindUICompOfType<TextMeshProUGUI>(tr, name);
+        }
+
         public static TextMeshProUGUI GetTextMesh (GameObject go, string name) {
-            return FindUICompOfType<TextMeshProUGUI>(go, name);
+            return GetTextMesh(go.transform, name);
         }
 
         public static Button GetButton (GameObject go, string name) {
