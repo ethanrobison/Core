@@ -40,7 +40,7 @@ namespace Utils
                     $"ValidatedComponent attr on non-Component field {field.Name}.");
             }
 
-            var target = targetTransform == "" ? transform : transform.Find(targetTransform);
+            var target = transform.Find(targetTransform);
             if (target == null) {
                 throw new ArgumentException($"Passed name {targetTransform} is invalid.");
             }
