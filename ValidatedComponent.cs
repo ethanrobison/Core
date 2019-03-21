@@ -7,10 +7,10 @@ namespace Utils
     [AttributeUsage(AttributeTargets.Field)]
     public class ValidatedComponent : Attribute
     {
-        public string Name { get; }
+        public string TargetTransform { get; }
 
-        public ValidatedComponent (string name = "") {
-            Name = name;
+        public ValidatedComponent (string targetTransform = "") {
+            TargetTransform = targetTransform;
         }
     }
 
@@ -28,17 +28,16 @@ namespace Utils
                 var attributes = field.GetCustomAttributes(true);
 
                 foreach (var attribute in attributes) {
-                    if (attribute is ValidatedComponent vc) { ValidateField(vc.Name, field); }
+                    if (attribute is ValidatedComponent vc) { ValidateField(vc.TargetTransform, field); }
                 }
             }
         }
 
         private void ValidateField (string targetTransform, FieldInfo field) {
             var fieldtype = field.FieldType;
-            Logging.Log($"Validated compoent: {field.Name}");
             if (!fieldtype.IsSubclassOf(typeof(Component))) {
-                Logging.Error($"Validated component put on something other than a component: {field.Name}");
-                return;
+                throw new CustomAttributeFormatException(
+                    $"ValidatedComponent attr on non-Component field {field.Name}.");
             }
 
             var target = targetTransform == "" ? transform : transform.Find(targetTransform);
@@ -48,11 +47,11 @@ namespace Utils
 
             var comps = target.GetComponents(fieldtype);
             if (comps.Length == 0) {
-                throw new Exception($"No components of type {fieldtype} to be found.");
+                throw new MissingComponentException($"No components of type {fieldtype} found.");
             }
 
             if (comps.Length > 1) {
-                throw new Exception($"More than one component of type {fieldtype} found.");
+                throw new Exception($"Multiple components of type {fieldtype} found.");
             }
 
             var comp = comps[0];
