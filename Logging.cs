@@ -1,5 +1,6 @@
 namespace Utils
 {
+    // TODO add options for multiple arguments to all of these things
     public static class Logging
     {
         public static void Log (string message) {
