@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-namespace Utils
+namespace Core
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class ValidatedComponent : Attribute

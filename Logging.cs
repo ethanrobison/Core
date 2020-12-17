@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace Utils
+namespace Core
 {
     public static class Logging
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Utils
+namespace Core
 {
     // TODO unit tests...
     public class SmartStack<T> where T : ISmartStackElement

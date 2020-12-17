@@ -7,8 +7,8 @@ public class Game : MonoBehaviour
 
     private void Awake() {
         Go = gameObject;
-        
-       Ctx = new SessionContext();
-       Ctx.Initialize();
+
+        Ctx = new SessionContext();
+        Ctx.Initialize();
     }
 }
