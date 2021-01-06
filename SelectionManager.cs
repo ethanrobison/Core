@@ -24,8 +24,6 @@ namespace Core
         }
 
         public void ToggleSelected(Selectable target) {
-            Logging.Log("Selecting", target);
-
             if (_selected != null) {
                 _selected.InformOfDeselection();
             }
@@ -52,10 +50,8 @@ namespace Core
 
             var hitcount = Physics2D.GetRayIntersectionNonAlloc(ray, _results, float.PositiveInfinity);
             if (hitcount > 0) {
-                Logging.Log("Found hits", hitcount);
                 ProcessClick(_results[0]);
             } else {
-                Logging.Log("No hits found, deselecting.");
                 DeselectAll();
             }
         }
