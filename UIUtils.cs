@@ -5,10 +5,22 @@ using UnityEngine.UI;
 
 namespace Core
 {
-    public static class UIUtils
+    public static class UiUtils
     {
-        public static Transform GetCanvas() {
-            return GameObject.Find("Canvas").transform; // hope there's only ever one canvas
+        public static Canvas GetCanvas() {
+            var canvastr = GameObject.Find("Canvas").transform; // hope there's only ever one canvas
+            if (canvastr == null) {
+                Logging.Error("Missing GameObject named \"Canvas\".");
+                return null;
+            }
+
+            var canvas = canvastr.GetComponent<Canvas>();
+            if (canvas == null) {
+                Logging.Error("Canvas GameObject has no Canvas component.");
+                return null;
+            }
+
+            return canvas;
         }
 
         public static TextMeshProUGUI GetTextMesh(Transform tr, string name) => FindUICompOfType<TextMeshProUGUI>(tr, name);
