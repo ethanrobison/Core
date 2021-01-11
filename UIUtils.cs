@@ -29,11 +29,21 @@ namespace Core
         public static Button GetButton(GameObject go, string name) => FindUICompOfType<Button>(go, name);
         public static Button GetAndSetButton(GameObject go, string name, UnityAction onClick) {
             var btn = GetButton(go, name);
+            if (btn == null) {
+                Logging.Error("Null button in search of", name);
+                return null;
+            }
+
             btn.SetListener(onClick);
             return btn;
         }
 
         public static T FindUICompOfType<T>(Transform parent, string name) where T : MonoBehaviour {
+            if (parent == null) {
+                Logging.Error("Null Transform in search of", name);
+                return null;
+            }
+
             var child = parent.Find(name);
             if (child == null) {
                 Logging.Error(parent.name, " missing child: ", name);
@@ -46,6 +56,10 @@ namespace Core
         }
 
         public static T FindUICompOfType<T>(GameObject go, string name) where T : MonoBehaviour {
+            if (go == null) {
+                Logging.Error("Null GameObject in search of", name);
+                return null;
+            }
             return FindUICompOfType<T>(go.transform, name);
         }
     }
