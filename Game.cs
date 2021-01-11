@@ -16,4 +16,6 @@ public class Game : MonoBehaviour
         Ctx = new SessionContext();
         Ctx.Initialize();
     }
+
+    private void Update() => Serv.Update();
 }
