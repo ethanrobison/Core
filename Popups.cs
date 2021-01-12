@@ -1,4 +1,6 @@
-﻿namespace Core
+﻿using UnityEngine.UI;
+
+namespace Core
 {
     public class Popups
     {
@@ -24,12 +26,24 @@
 
     public abstract class PopupDialog : BaseDialog, ISmartStackElement
     {
+        protected const string CONTAINER = "Container/", CLOSE = CONTAINER + "Close/";
+        protected Button _close;
+
+        protected override void OnBeforeShow() {
+            base.OnBeforeShow();
+            _close = UiUtils.GetAndSetButton(_go, CLOSE, Close);
+        }
+
+        protected override void OnAfterHide() {
+            base.OnAfterHide();
+        }
+
         public void Activate() {
             RefreshContents();
         }
 
         public void Deactivate() {
-            throw new System.NotImplementedException();
+            // TODO?
         }
 
         public void OnPopped() {
@@ -39,5 +53,7 @@
         public void OnPushed() {
             RequestShow();
         }
+
+        public override void Close() => Game.Serv.Ui.Bar(this);
     }
 }

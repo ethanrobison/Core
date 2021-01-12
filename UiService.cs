@@ -104,6 +104,7 @@ namespace Core
         /// Show designated popup.
         /// </summary>
         public void Foo(PopupDialog popup) {
+            Logging.Assert(popup != null, "Passing invalid popup to show");
             _popups.ShowPopup(popup);
         }
 
@@ -111,7 +112,9 @@ namespace Core
         /// Hides the top popup.
         /// </summary>
         public void Bar(PopupDialog popup) {
-
+            Logging.Assert(popup != null, "Passing invalid popup to hide");
+            Logging.Assert(_popups.GetTopPopup() == popup, "Hiding non-top popup");
+            _popups.HidePopup(popup);
         }
     }
 
@@ -132,6 +135,7 @@ namespace Core
         bool IsShowing { get; }
         void RequestShow();
         void RequestHide();
+        void Close();
     }
 
     public interface IUiUpdatingDialog : IUiDialog

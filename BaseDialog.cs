@@ -21,8 +21,6 @@ namespace Core
 
         virtual protected void RefreshContents() { }
 
-        // TODO what do we do about... ensuring that this gets called?
-        protected BaseDialog() => Initialize();
         protected void Initialize() {
             _go = Game.Serv.Ui.GetUi(Ui);
             _initialized = true;
@@ -34,12 +32,12 @@ namespace Core
         }
 
         public void RequestShow() {
-            // TODO how to ensure it gets initialized?
-            _go = Game.Serv.Ui.GetUi(Ui);
             OnBeforeShow();
             _go.SetActive(true);
 
             RefreshContents();
         }
+
+        public abstract void Close();
     }
 }
