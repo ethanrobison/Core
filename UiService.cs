@@ -16,6 +16,7 @@ namespace Core
     public class UiService : IServiceManager
     {
         private Dictionary<UiScene, Dictionary<UiPrefab, GameObject>> _uiReferences = new Dictionary<UiScene, Dictionary<UiPrefab, GameObject>>();
+        private Popups _popups = new Popups();
 
         public void Initialize() {
             SceneManager.sceneLoaded += OnMainSceneLoaded;
@@ -35,14 +36,14 @@ namespace Core
             return true;
         }
 
-        private void StartLoadingScene(string name) => SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+        private void StartLoadingScene(UiScene scene) => SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
 
         private void OnMainSceneLoaded(Scene scene, LoadSceneMode mode) {
             Logging.Assert(scene.name == "Game", "Called OnMainSceneLoaded on wrong scene", scene.name);
             SceneManager.sceneLoaded -= OnMainSceneLoaded;
             SceneManager.sceneLoaded += OnUiSceneLoaded;
 
-            StartLoadingScene("SessionUi");
+            StartLoadingScene(UiScene.SessionUi);
         }
 
         private void OnUiSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -96,9 +97,22 @@ namespace Core
         }
 
         public void ShowUiElementTemp(IUiDialog dialog) {
-            dialog.RequestShow(this);
+            dialog.RequestShow();
         }
 
+        /// <summary>
+        /// Show designated popup.
+        /// </summary>
+        public void Foo(PopupDialog popup) {
+            _popups.ShowPopup(popup);
+        }
+
+        /// <summary>
+        /// Hides the top popup.
+        /// </summary>
+        public void Bar(PopupDialog popup) {
+
+        }
     }
 
     public struct UiReference
@@ -116,8 +130,8 @@ namespace Core
     public interface IUiDialog
     {
         bool IsShowing { get; }
-        void RequestShow(UiService service);
-        void RequestHide(UiService service);
+        void RequestShow();
+        void RequestHide();
     }
 
     public interface IUiUpdatingDialog : IUiDialog

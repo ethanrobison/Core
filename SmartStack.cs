@@ -11,9 +11,9 @@ namespace Core
 
         public bool Empty => Size == 0;
 
-        public T Peek => _stack[Size - 1];
+        public T Peek => Empty ? default : _stack[Size - 1];
 
-        public void Push (T element) {
+        public void Push(T element) {
             // Deactivate old
             if (!Empty) { Peek.Deactivate(); }
 
@@ -26,7 +26,7 @@ namespace Core
             Size++;
         }
 
-        public T Pop () {
+        public T Pop() {
             // TODO add trypop?
             if (Empty) { throw new InvalidOperationException("Popping an empty stack!"); }
 
@@ -49,9 +49,9 @@ namespace Core
 
     public interface ISmartStackElement
     {
-        void OnPushed ();
-        void Activate ();
-        void Deactivate ();
-        void OnPopped ();
+        void OnPushed();
+        void Activate();
+        void Deactivate();
+        void OnPopped();
     }
 }
