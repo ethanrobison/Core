@@ -39,6 +39,7 @@ namespace Core
             // Remove top
             var element = _stack[Size - 1];
             _stack.RemoveAt(Size - 1);
+            Size--;
 
             // Activate new top
             if (!Empty) { Peek.Activate(); }
