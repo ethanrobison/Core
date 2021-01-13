@@ -54,6 +54,6 @@ namespace Core
             RequestShow();
         }
 
-        public override void Close() => Game.Serv.Ui.Bar(this);
+        public void Close() => Game.Serv.Ui.HidePopup(this);
     }
 }

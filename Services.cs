@@ -63,7 +63,7 @@ namespace Core
         /// Called exactly once, after every service has finished loading.
         /// </summary>
         private void OnFinishedLoading() {
-            Ui.ShowUiElementTemp(new MainMenuDialog());
+            Ui.ShowDialog(new MainMenuDialog());
             _state = ServiceState.Initialized;
         }
     }

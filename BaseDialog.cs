@@ -5,26 +5,19 @@ namespace Core
     public abstract class BaseDialog : IUiDialog
     {
         protected GameObject _go;
-        private bool _initialized;
 
-        public abstract bool IsShowing { get; }
-        public abstract bool ShowAtStartUp { get; }
+        public bool IsShowing => _go.activeSelf;
         public abstract UiReference Ui { get; }
 
-        virtual protected void OnBeforeShow() {
-            if (!_initialized) {
-                Initialize();
-            }
-        }
+        protected BaseDialog() => Initialize();
+
+        virtual protected void OnBeforeShow() { }
 
         virtual protected void OnAfterHide() { }
 
         virtual protected void RefreshContents() { }
 
-        protected void Initialize() {
-            _go = Game.Serv.Ui.GetUi(Ui);
-            _initialized = true;
-        }
+        protected void Initialize() => _go = Game.Serv.Ui.GetUi(Ui);
 
         public void RequestHide() {
             _go.SetActive(false);
@@ -37,7 +30,5 @@ namespace Core
 
             RefreshContents();
         }
-
-        public abstract void Close();
     }
 }

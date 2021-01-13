@@ -17,6 +17,7 @@ namespace Core
     {
         private Dictionary<UiScene, Dictionary<UiPrefab, GameObject>> _uiReferences = new Dictionary<UiScene, Dictionary<UiPrefab, GameObject>>();
         private Popups _popups = new Popups();
+        private List<IUiDialog> _dialogs = new List<IUiDialog>();
 
         public void Initialize() {
             SceneManager.sceneLoaded += OnMainSceneLoaded;
@@ -96,14 +97,30 @@ namespace Core
             return go;
         }
 
-        public void ShowUiElementTemp(IUiDialog dialog) {
+        public void ShowDialog(IUiDialog dialog) {
+            if (dialog.IsShowing) {
+                Logging.Warn("Attempting to double show dialog", dialog);
+                return;
+            }
+
             dialog.RequestShow();
+            _dialogs.Add(dialog);
+        }
+
+        public void HideDialog(IUiDialog dialog) {
+            if (!dialog.IsShowing) {
+                Logging.Warn("Attempting to double hide dialog", dialog);
+                return;
+            }
+
+            dialog.RequestHide();
+            _dialogs.Remove(dialog);
         }
 
         /// <summary>
         /// Show designated popup.
         /// </summary>
-        public void Foo(PopupDialog popup) {
+        public void ShowPopup(PopupDialog popup) {
             Logging.Assert(popup != null, "Passing invalid popup to show");
             _popups.ShowPopup(popup);
         }
@@ -111,7 +128,7 @@ namespace Core
         /// <summary>
         /// Hides the top popup.
         /// </summary>
-        public void Bar(PopupDialog popup) {
+        public void HidePopup(PopupDialog popup) {
             Logging.Assert(popup != null, "Passing invalid popup to hide");
             Logging.Assert(_popups.GetTopPopup() == popup, "Hiding non-top popup");
             _popups.HidePopup(popup);
@@ -135,7 +152,6 @@ namespace Core
         bool IsShowing { get; }
         void RequestShow();
         void RequestHide();
-        void Close();
     }
 
     public interface IUiUpdatingDialog : IUiDialog
