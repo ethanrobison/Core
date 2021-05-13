@@ -46,12 +46,12 @@ namespace Core
 
             var child = parent.Find(name);
             if (child == null) {
-                Logging.Error(parent.name, " missing child: ", name);
+                Logging.Error(parent.name, "missing child:", name);
                 return null;
             }
 
             var comp = child.gameObject.GetComponent<T>();
-            Logging.Assert(comp != null, "Child missing component of type: " + typeof(T));
+            Logging.Assert(comp != null, "Child missing component of type:", typeof(T));
             return comp;
         }
 

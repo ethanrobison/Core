@@ -117,10 +117,12 @@ namespace Core
             _dialogs.Remove(dialog);
         }
 
+        public void AddPopup<T>() where T : PopupDialog, new() => AddPopup(new T());
+
         /// <summary>
         /// Show designated popup.
         /// </summary>
-        public void ShowPopup(PopupDialog popup) {
+        public void AddPopup(PopupDialog popup) {
             Logging.Assert(popup != null, "Passing invalid popup to show");
             _popups.ShowPopup(popup);
         }
@@ -128,7 +130,7 @@ namespace Core
         /// <summary>
         /// Hides the top popup.
         /// </summary>
-        public void HidePopup(PopupDialog popup) {
+        public void RemovePopup(PopupDialog popup) {
             Logging.Assert(popup != null, "Passing invalid popup to hide");
             Logging.Assert(_popups.GetTopPopup() == popup, "Hiding non-top popup");
             _popups.HidePopup(popup);
