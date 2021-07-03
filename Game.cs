@@ -19,3 +19,9 @@ public class Game : MonoBehaviour
 
     private void Update() => Serv.Update();
 }
+
+// TODO
+public class SessionContext
+{
+    public void Initialize() { }
+}

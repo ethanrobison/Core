@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using UiPrefabs;
+//using UiPrefabs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Core
+namespace Core.Ui
 {
     public enum UiScene
     {
@@ -73,10 +73,11 @@ namespace Core
 
             var childcount = first.transform.childCount;
             for (int i = 0; i < childcount; i++) {
-                var child = first.transform.GetChild(i);
-                var prefab = UiElements.EnumFromPrefabPath(child.name);
-                if (prefab == UiPrefab.Invalid) { continue; }
-                _uiReferences[uiscene][prefab] = child.gameObject;
+                // TODO
+                //var child = first.transform.GetChild(i);
+                //var prefab = UiElements.EnumFromPrefabPath(child.name);
+                //if (prefab == UiPrefab.Invalid) { continue; }
+                //_uiReferences[uiscene][prefab] = child.gameObject;
             }
         }
 
@@ -160,4 +161,13 @@ namespace Core
     {
         void OnFrameUpdate();
     }
+
+
+    // TODO
+    public class UiElements
+    {
+        public static string PrefabPathFromEnum(UiPrefab prefab) { return ""; }
+
+    }
+    public class UiPrefab { }
 }

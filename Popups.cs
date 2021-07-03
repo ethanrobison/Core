@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 
-namespace Core
+namespace Core.Ui
 {
     public class Popups
     {

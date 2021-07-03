@@ -46,14 +46,15 @@ namespace Core
             }
 
             var screenpos = Input.mousePosition;
-            Ray ray = Game.Ctx.Camera.Cam.ScreenPointToRay(screenpos);
+            // TODO
+            //Ray ray = Game.Ctx.Camera.Cam.ScreenPointToRay(screenpos);
 
-            var hitcount = Physics2D.GetRayIntersectionNonAlloc(ray, _results, float.PositiveInfinity);
-            if (hitcount > 0) {
-                ProcessClick(_results[0]);
-            } else {
-                DeselectAll();
-            }
+            //var hitcount = Physics2D.GetRayIntersectionNonAlloc(ray, _results, float.PositiveInfinity);
+            //if (hitcount > 0) {
+            //    ProcessClick(_results[0]);
+            //} else {
+            //    DeselectAll();
+            //}
         }
 
         private void ProcessClick(RaycastHit2D hit) {

@@ -1,5 +1,5 @@
 ﻿using System;
-using Ui;
+using Core.Ui;
 
 namespace Core
 {
@@ -63,8 +63,9 @@ namespace Core
         /// Called exactly once, after every service has finished loading.
         /// </summary>
         private void OnFinishedLoading() {
-            Ui.ShowDialog(new MainMenuDialog());
-            _state = ServiceState.Initialized;
+            // TODO
+            //Ui.ShowDialog(new MainMenuDialog());
+            //_state = ServiceState.Initialized;
         }
     }
 

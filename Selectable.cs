@@ -8,7 +8,8 @@ namespace Core
         public abstract void InformOfDeselection();
 
         private void OnMouseDown() {
-            Game.Ctx.Selection.ToggleSelected(this);
+            // TODO
+            //Game.Ctx.Selection.ToggleSelected(this);
         }
     }
 }

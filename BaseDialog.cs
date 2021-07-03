@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core
+namespace Core.Ui
 {
     public abstract class BaseDialog : IUiDialog
     {
