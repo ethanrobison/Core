@@ -114,8 +114,10 @@ namespace Core.SaveLoad
             }
         }
 
-        //private static bool TrySerializeValueType(Type type, object o) {
-        //}
+        private static bool TrySerializeValueType(Type type, object o) {
+            return false;
+        }
+        
 
         private static void Bar(Type type, HashSet<FieldInfo> fields) {
             var saveLoadClass = type.GetCustomAttribute<SaveLoadClassAttribute>();
