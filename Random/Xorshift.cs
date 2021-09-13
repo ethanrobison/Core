@@ -17,6 +17,8 @@ namespace Core.Random
             _state = seed;
         }
 
+        public bool CoinToss() => Next(1) == 0;
+
         public uint Next() {
             Logging.Assert(_state != 0, "Ended up with an xorshift at 0");
 
@@ -51,6 +53,19 @@ namespace Core.Random
             uint diff = (uint)(max - min);
             uint offset = res % diff;
             return min + (int)offset;
+        }
+
+        private const float UINT_TO_FLOAT = (1.0f / 4294967296.0f);
+        public float Next(float max) => Next(0.0f, max);
+        public float Next(float min, float max) {
+            if (min >= max) {
+                Logging.Error("Min must be strictly less than max for generation", min, max);
+                return 0f;
+            }
+
+            float res = Next() * UINT_TO_FLOAT;
+            float diff = max - min;
+            return min + res * diff;
         }
     }
 }
